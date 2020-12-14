@@ -1,0 +1,37 @@
+[
+  {
+    "films_as_actor": "",
+    "films_as_director": "ab2811a3-3295-4564-988d-1ebc2ee03ab6",
+    "films_as_writer": "ab2811a3-3295-4564-988d-1ebc2ee03ab6",
+    "full_name": "George Lucas",
+    "id": "3b31b4d1-6ab9-4552-b1ab-de3b61e25e24"
+  },
+  {
+    "films_as_actor": "ab2811a3-3295-4564-988d-1ebc2ee03ab6",
+    "films_as_director": "",
+    "films_as_writer": "",
+    "full_name": "Harrison Ford",
+    "id": "5f9f12c2-1d47-4393-867d-a0fa8b3e6a27"
+  },
+  {
+    "films_as_actor": "ab2811a3-3295-4564-988d-1ebc2ee03ab6",
+    "films_as_director": "",
+    "films_as_writer": "",
+    "full_name": "Carrie Fisher",
+    "id": "de8eecfe-1360-4b09-9e3e-ea9613e743e1"
+  },
+  {
+    "films_as_actor": "",
+    "films_as_director": "",
+    "films_as_writer": "04f15490-e7af-462d-8e98-9dcf3d5c2420",
+    "full_name": "Mark Cartwright",
+    "id": "45250155-4a9a-40fd-ab8f-7a2e9fde13d7"
+  },
+  {
+    "films_as_actor": "",
+    "films_as_director": "79e3ad11-f423-434a-b665-6da97b309a15",
+    "films_as_writer": "79e3ad11-f423-434a-b665-6da97b309a15",
+    "full_name": "Deepu Anthikkad",
+    "id": "4a7751af-70fc-4377-b01b-8e518e25eb1f"
+  }
+]
