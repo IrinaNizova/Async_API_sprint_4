@@ -1,0 +1,35 @@
+[
+  {
+    "create": {
+      "_index": "genre",
+      "_id": "e4dfbcad-abf9-41e2-89e1-0a74f9d028c1"
+    }
+  },
+  {
+    "id": "e4dfbcad-abf9-41e2-89e1-0a74f9d028c1",
+    "name": "Action",
+    "films": "ab2811a3-3295-4564-988d-1ebc2ee03ab6, 04f15490-e7af-462d-8e98-9dcf3d5c2420"
+  },
+  {
+    "create": {
+      "_index": "genre",
+      "_id": "ba3f980c-645e-4fb3-afc1-d57d2b0f3d87"
+    }
+  },
+  {
+    "id": "ba3f980c-645e-4fb3-afc1-d57d2b0f3d87",
+    "name": "Sci-Fi",
+    "films": "ab2811a3-3295-4564-988d-1ebc2ee03ab6, db1e8248-29d0-4454-8717-216caeb27426, 04f15490-e7af-462d-8e98-9dcf3d5c2420"
+  },
+  {
+    "create": {
+      "_index": "genre",
+      "_id": "a6c1c98c-350f-4665-be0d-aebd37f81a18"
+    }
+  },
+  {
+    "id": "a6c1c98c-350f-4665-be0d-aebd37f81a18",
+    "name": "Drama",
+    "films": "5d5e3408-cb40-4f74-a6bd-dd4935cf9dbc, 79e3ad11-f423-434a-b665-6da97b309a15"
+  }
+]
