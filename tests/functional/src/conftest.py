@@ -8,7 +8,7 @@ from elasticsearch import AsyncElasticsearch
 from ..settings import ELASTICSEARCH_HOST
 from dataclasses import dataclass
 from multidict import CIMultiDictProxy
-from ..settings import SERVICE_URL
+from ..settings import SERVICE_URL, REDIS_HOST, REDIS_PORT
 
 
 @dataclass
@@ -42,7 +42,7 @@ async def es_client():
 
 @pytest.fixture(scope='session')
 async def redis_client():
-    redis = await aioredis.create_redis_pool(('127.0.0.1', '6379'), minsize=10, maxsize=20)
+    redis = await aioredis.create_redis_pool((REDIS_HOST, REDIS_PORT), minsize=10, maxsize=20)
     yield redis
     redis.close()
 
