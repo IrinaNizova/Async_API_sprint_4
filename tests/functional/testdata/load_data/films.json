@@ -1,0 +1,221 @@
+[
+  {
+    "create": {
+      "_index": "movies",
+      "_id": "ab2811a3-3295-4564-988d-1ebc2ee03ab6"
+    }
+  },
+  {
+    "id": "ab2811a3-3295-4564-988d-1ebc2ee03ab6",
+    "genre": [
+      "Action",
+      "Adventure",
+      "Fantasy",
+      "Sci-Fi"
+    ],
+    "writers": [
+      {
+        "id": "3b31b4d1-6ab9-4552-b1ab-de3b61e25e24",
+        "name": "George Lucas"
+      }
+    ],
+    "actors": [
+      {
+        "id": "acf26f73-999b-45e8-8713-56b0b6948df5",
+        "name": "Mark Hamill"
+      },
+      {
+        "id": "5f9f12c2-1d47-4393-867d-a0fa8b3e6a27",
+        "name": "Harrison Ford"
+      },
+      {
+        "id": "de8eecfe-1360-4b09-9e3e-ea9613e743e1",
+        "name": "Carrie Fisher"
+      },
+      {
+        "id": "9ef3d378-4353-4823-9b61-a29969afa3f2",
+        "name": "Peter Cushing"
+      }
+    ],
+    "actors_names": "Mark Hamill, Harrison Ford, Carrie Fisher, Peter Cushing",
+    "writers_names": "George Lucas",
+    "imdb_rating": 8.6,
+    "title": "Star Wars: Episode IV - A New Hope",
+    "director": "George Lucas",
+    "description": "The Imperial Forces, under orders from cruel Darth Vader, hold Princess Leia hostage in their efforts to quell the rebellion against the Galactic Empire. Luke Skywalker and Han Solo, captain of the Millennium Falcon, work together with the companionable droid duo R2-D2 and C-3PO to rescue the beautiful princess, help the Rebel Alliance and restore freedom and justice to the Galaxy."
+  },
+  {
+    "create": {
+      "_index": "movies",
+      "_id": "79e3ad11-f423-434a-b665-6da97b309a15"
+    }
+  },
+  {
+    "id": "79e3ad11-f423-434a-b665-6da97b309a15",
+    "genre": [
+      "Comedy",
+      "Drama"
+    ],
+    "writers": [
+      {
+        "id": "4a7751af-70fc-4377-b01b-8e518e25eb1f",
+        "name": "Deepu Anthkkad"
+      }
+    ],
+    "actors": [
+      {
+        "id": "8ab5bffb-ee2a-465f-9763-3995e140f62d",
+        "name": "Jayaram"
+      },
+      {
+        "id": "4de8381c-6364-439e-9464-d11b88ea78f6",
+        "name": "Mukesh"
+      },
+      {
+        "id": "4d7fb89c-f272-472a-b2cd-24a80cec76b6",
+        "name": "Rachana Narayanankutty"
+      },
+      {
+        "id": "67bc0ac9-1e70-419a-98c8-a93d85c1098d",
+        "name": "Pooja Ramachandran"
+      }
+    ],
+    "actors_names": "Jayaram, Mukesh, Rachana Narayanankutty, Pooja Ramachandran",
+    "writers_names": "Deepu Anthkkad",
+    "imdb_rating": 5.4,
+    "title": "Lucky Star",
+    "director": "Deepu Anthikkad",
+    "description": "An ambitious couples got in to trouble when a surrogate plan went wrong but luck comes when the baby comes to their life."
+  },
+  {
+    "create": {
+      "_index": "movies",
+      "_id": "db1e8248-29d0-4454-8717-216caeb27426"
+    }
+  },
+  {
+    "id": "db1e8248-29d0-4454-8717-216caeb27426",
+    "genre": [
+      "Sci-Fi"
+    ],
+    "writers": [],
+    "actors": [
+      {
+        "id": "ef630b9c-c4cb-41fe-9871-0f6d39a608f0",
+        "name": "Taylor Gilbert"
+      },
+      {
+        "id": "050122c6-3396-4625-b87c-732962f993ff",
+        "name": "Jeff Munson"
+      },
+      {
+        "id": "416a680c-fccf-4615-b29c-a3973eeb872d",
+        "name": "David O\"Hara"
+      },
+      {
+        "id": "77dc4ab2-2d3c-4688-a18e-5fcf866cdd19",
+        "name": "Orly Oh"
+      }
+    ],
+    "actors_names": "Taylor Gilbert, Jeff Munson, David O\"Hara, Orly Oh",
+    "writers_names": "",
+    "imdb_rating": 2.7,
+    "title": "Star Worms II: Attack of the Pleasure Pods",
+    "director": "Lin Sten",
+    "description": "Jessup, forced to hide his true identity, is imprisoned on a deadly and desolate planet, the Star Prison. banished to mine rabid rivers for the elusive Fire Gems, Jessup and his men must battle bands of derelict prisoners and fight the fatal fangs of the Star Worms in order to supply the Lords of the Evil Empire with the sacred source of their hedonistic hallucinogenic opiates."
+  },
+  {
+    "create": {
+      "_index": "movies",
+      "_id": "04f15490-e7af-462d-8e98-9dcf3d5c2420"
+    }
+  },
+  {
+    "id": "04f15490-e7af-462d-8e98-9dcf3d5c2420",
+    "genre": [
+      "Adventure",
+      "Sci-Fi",
+      "Action"
+    ],
+    "writers": [
+      {
+        "id": "45250155-4a9a-40fd-ab8f-7a2e9fde13d7",
+        "name": "Mark Cartwright"
+      },
+      {
+        "id": "86bbbc17-8e4c-4770-8524-5112e377dcae",
+        "name": "Justin Chin"
+      },
+      {
+        "id": "2b86aa9a-6134-4c76-9f3f-b18aa2b8e9b2",
+        "name": "Brett Tosti"
+      }
+    ],
+    "actors": [
+      {
+        "id": "b6821c60-3025-4f24-ba21-a65043ad36bc",
+        "name": "Scott Lawrence"
+      },
+      {
+        "id": "140ae6b6-a66f-46e0-b4d3-f4994490f9d2",
+        "name": "Nick Jameson"
+      },
+      {
+        "id": "03c816b1-da4e-4258-9054-a24f98de71f5",
+        "name": "Julie Eccles"
+      },
+      {
+        "id": "225346d8-23df-4f1a-be40-63716b7d1a95",
+        "name": "Jack Angel"
+      }
+    ],
+    "actors_names": "Scott Lawrence, Nick Jameson, Julie Eccles, Jack Angel",
+    "writers_names": "Mark Cartwright, Justin Chin, Brett Tosti",
+    "imdb_rating": 8.1,
+    "title": "Star Wars: Dark Forces",
+    "director": "",
+    "description": ""
+  },
+  {
+    "create": {
+      "_index": "movies",
+      "_id": "5d5e3408-cb40-4f74-a6bd-dd4935cf9dbc"
+    }
+  },
+  {
+    "id": "5d5e3408-cb40-4f74-a6bd-dd4935cf9dbc",
+    "genre": [
+      "Drama"
+    ],
+    "writers": [
+      {
+        "id": "40c29806-f19f-4504-a784-6a818e2ac4e9",
+        "name": "Ren\u00e9 F\u00e9ret"
+      }
+    ],
+    "actors": [
+      {
+        "id": "ec1fb1ca-f0ce-4cce-84b9-015559cd7708",
+        "name": "Salom\u00e9 St\u00e9venin"
+      },
+      {
+        "id": "b42e622f-7f6c-4806-a25e-0b1acfdf790a",
+        "name": "Nicolas Giraud"
+      },
+      {
+        "id": "85f3739c-9241-4f62-ba3e-593a4378a40a",
+        "name": "Jean-Fran\u00e7ois St\u00e9venin"
+      },
+      {
+        "id": "34042d70-7e8b-40f9-b2aa-19dd12bb4b60",
+        "name": "Marilyne Canto"
+      }
+    ],
+    "actors_names": "Salom\u00e9 St\u00e9venin, Nicolas Giraud, Jean-Fran\u00e7ois St\u00e9venin, Marilyne Canto",
+    "writers_names": "Ren\u00e9 F\u00e9ret",
+    "imdb_rating": 6.9,
+    "title": "Like a Star Shining in the Night",
+    "director": "Ren\u00e9 F\u00e9ret",
+    "description": ""
+  }
+]

@@ -1,0 +1,27 @@
+[
+  {
+    "id": "db1e8248-29d0-4454-8717-216caeb27426",
+    "imdb_rating": 2.7,
+    "title": "Star Worms II: Attack of the Pleasure Pods"
+  },
+  {
+    "id": "79e3ad11-f423-434a-b665-6da97b309a15",
+    "imdb_rating": 5.4,
+    "title": "Lucky Star"
+  },
+  {
+    "id": "5d5e3408-cb40-4f74-a6bd-dd4935cf9dbc",
+    "imdb_rating": 6.9,
+    "title": "Like a Star Shining in the Night"
+  },
+  {
+    "id": "04f15490-e7af-462d-8e98-9dcf3d5c2420",
+    "imdb_rating": 8.1,
+    "title": "Star Wars: Dark Forces"
+  },
+  {
+    "id": "ab2811a3-3295-4564-988d-1ebc2ee03ab6",
+    "imdb_rating": 8.6,
+    "title": "Star Wars: Episode IV - A New Hope"
+  }
+]
