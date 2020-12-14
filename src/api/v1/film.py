@@ -10,7 +10,12 @@ from services.film import FilmService, get_film_service
 router = APIRouter()
 
 
-@router.get('/search', response_model=List[Film], response_model_include={'id', 'title', 'imdb_rating'})
+@router.get('/search', response_model=List[Film],
+            response_model_include={'id', 'title', 'imdb_rating'},
+            summary="Поиск кинопроизведений",
+            description="Полнотекстовый поиск по кинопроизведениям",
+            response_description="Название и рейтинг фильма",
+            tags=['Полнотекстовый поиск'])
 async def search_film_list(
         request: Request,
         film_service: FilmService = Depends(get_film_service)
@@ -27,12 +32,17 @@ async def search_film_list(
 
 
 # внедряем FilmService с помощью Depends(get_film_service)
-@router.get('/{film_id}', response_model=Film, responses={
-        404: {
-            'model': ResponseMessage,
-            'description': 'Film wasn\'t found'
-        },
-    })
+@router.get('/{film_id}', response_model=Film,
+            summary="Информация по фильму",
+            description="Подробная информация по uuid фильма",
+            response_description="Название, жанры и рейтинг фильма, актёры, режиссёры и сценаристы, принявшие участие",
+            responses={
+                404: {
+                    'model': ResponseMessage,
+                    'description': 'Film wasn\'t found'
+                },
+            }
+            )
 async def film_details(
         film_id: str,
         film_service: FilmService = Depends(get_film_service)
@@ -50,7 +60,13 @@ async def film_details(
     return film
 
 
-@router.get('/', response_model=List[Film], response_model_include={'id', 'title', 'imdb_rating'})
+@router.get('/', response_model=List[Film],
+            response_model_include={'id', 'title', 'imdb_rating'},
+            summary="Список фильмов",
+            description="Список фильмов, отсортированных по жанру, если он передан",
+            response_description="Список фильмов, количество фильмов на странице, номер страницы, "
+                                 "параметр сортировки передаётся как kwargs",
+            )
 async def film_list(
         request: Request,
         film_service: FilmService = Depends(get_film_service),

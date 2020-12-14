@@ -1,0 +1,502 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Read-only API для онлайн-кинотеатра",
+    "description": "Информация о фильмах, жанрах и людях, участвовавших в создании произведения",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/v1/film/search": {
+      "get": {
+        "tags": [
+          "Полнотекстовый поиск",
+          "Фильмы"
+        ],
+        "summary": "Поиск кинопроизведений",
+        "description": "Полнотекстовый поиск по кинопроизведениям",
+        "operationId": "search_film_list_api_v1_film_search_get",
+        "responses": {
+          "200": {
+            "description": "Название и рейтинг фильма",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Search Film List Api V1 Film Search Get",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Film"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/film/{film_id}": {
+      "get": {
+        "tags": [
+          "Фильмы"
+        ],
+        "summary": "Информация по фильму",
+        "description": "Подробная информация по uuid фильма",
+        "operationId": "film_details_api_v1_film__film_id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Film Id",
+              "type": "string"
+            },
+            "name": "film_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Название, жанры и рейтинг фильма, актёры, режиссёры и сценаристы, принявшие участие",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Film"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Film wasn't found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseMessage"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/film/": {
+      "get": {
+        "tags": [
+          "Фильмы"
+        ],
+        "summary": "Список фильмов",
+        "description": "Список фильмов, отсортированных по жанру, если он передан",
+        "operationId": "film_list_api_v1_film__get",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "Genre",
+              "type": "string"
+            },
+            "name": "genre",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Список фильмов, количество фильмов на странице, номер страницы, параметр сортировки передаётся как kwargs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Film List Api V1 Film  Get",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Film"
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/person/search": {
+      "get": {
+        "tags": [
+          "Полнотекстовый поиск",
+          "Персоны"
+        ],
+        "summary": "Поиск персон",
+        "description": "Полнотекстовый поиск по персонам",
+        "operationId": "search_person_list_api_v1_person_search_get",
+        "responses": {
+          "200": {
+            "description": "ФИО персоны и фильмы, где она приняла участие",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Search Person List Api V1 Person Search Get",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Person"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/person/{person_uuid}": {
+      "get": {
+        "tags": [
+          "Персоны"
+        ],
+        "summary": "Информация по персоне",
+        "description": "Подробная информация по uuid фперсоны",
+        "operationId": "get_person_api_v1_person__person_uuid__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Person Uuid",
+              "type": "string"
+            },
+            "name": "person_uuid",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ФИО персоны и фильмы, где она приняла участие",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Person"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Person wasn't found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseMessage"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/person/{person_uuid}/film": {
+      "get": {
+        "tags": [
+          "Персоны"
+        ],
+        "summary": "Информация по фильмам, где участвовала персона",
+        "description": "Информация о фильмах, где приняла участие персона",
+        "operationId": "get_persons_films_api_v1_person__person_uuid__film_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Person Uuid",
+              "type": "string"
+            },
+            "name": "person_uuid",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Список фильмов, где приняла участие персона",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Get Persons Films Api V1 Person  Person Uuid  Film Get",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Film"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Person wasn't found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseMessage"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/genre/": {
+      "get": {
+        "tags": [
+          "Жанры"
+        ],
+        "summary": "Список жанров",
+        "description": "Список жанров фильмов",
+        "operationId": "get_genres_api_v1_genre__get",
+        "responses": {
+          "200": {
+            "description": "Список жанров и фильмов с ними",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Get Genres Api V1 Genre  Get",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Genre"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/genre/{genre_uuid}": {
+      "get": {
+        "tags": [
+          "Жанры"
+        ],
+        "summary": "Информация по жанру",
+        "description": "Подробная информация по uuid жанра",
+        "operationId": "get_genre_api_v1_genre__genre_uuid__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Genre Uuid",
+              "type": "string"
+            },
+            "name": "genre_uuid",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Genre"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Genre wasn't found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseMessage"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Film": {
+        "title": "Film",
+        "required": [
+          "id",
+          "title",
+          "genre",
+          "actors",
+          "writers"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "genre": {
+            "title": "Genre",
+            "type": "array",
+            "items": {}
+          },
+          "actors": {
+            "title": "Actors",
+            "type": "array",
+            "items": {}
+          },
+          "writers": {
+            "title": "Writers",
+            "type": "array",
+            "items": {}
+          },
+          "imdb_rating": {
+            "title": "Imdb Rating",
+            "type": "number"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          }
+        }
+      },
+      "Genre": {
+        "title": "Genre",
+        "required": [
+          "id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "films": {
+            "title": "Films",
+            "type": "string"
+          }
+        }
+      },
+      "HTTPValidationError": {
+        "title": "HTTPValidationError",
+        "type": "object",
+        "properties": {
+          "detail": {
+            "title": "Detail",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            }
+          }
+        }
+      },
+      "Person": {
+        "title": "Person",
+        "required": [
+          "id",
+          "full_name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "full_name": {
+            "title": "Full Name",
+            "type": "string"
+          },
+          "films_as_actor": {
+            "title": "Films As Actor",
+            "type": "string"
+          },
+          "films_as_writer": {
+            "title": "Films As Writer",
+            "type": "string"
+          },
+          "films_as_director": {
+            "title": "Films As Director",
+            "type": "string"
+          }
+        }
+      },
+      "ResponseMessage": {
+        "title": "ResponseMessage",
+        "type": "object",
+        "properties": {
+          "message": {
+            "title": "Message",
+            "type": "string"
+          }
+        }
+      },
+      "ValidationError": {
+        "title": "ValidationError",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "loc": {
+            "title": "Location",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

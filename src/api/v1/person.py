@@ -13,7 +13,12 @@ from services.person import PersonService, get_person_service
 router = APIRouter()
 
 
-@router.get('/search', response_model=List[Person])
+@router.get('/search',
+            summary="Поиск персон",
+            description="Полнотекстовый поиск по персонам",
+            response_description="ФИО персоны и фильмы, где она приняла участие",
+            tags=['Полнотекстовый поиск'],
+            response_model=List[Person])
 async def search_person_list(
         request: Request,
         person_service: PersonService = Depends(get_person_service),
@@ -31,6 +36,9 @@ async def search_person_list(
 
 @router.get(
     '/{person_uuid}',
+    summary="Информация по персоне",
+    description="Подробная информация по uuid персоны",
+    response_description="ФИО персоны и фильмы, где она приняла участие",
     response_model=Person,
     responses={
         404: {
@@ -51,6 +59,9 @@ async def get_person(
 
 @router.get(
     '/{person_uuid}/film',
+    summary="Информация по фильмам, где участвовала персона",
+    description="Информация о фильмах, где приняла участие персона",
+    response_description="Список фильмов, где приняла участие персона",
     response_model=List[Film],
     response_model_include={'id', 'title', 'imdb_rating'},
     responses={
