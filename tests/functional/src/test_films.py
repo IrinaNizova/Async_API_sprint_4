@@ -16,6 +16,24 @@ class TestFilmApi:
         with open(file) as f:
             return json.load(f)
 
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize(('query_param', 'len_films', 'fixture_id'), (
+            ('Star Wars', 5, 0),
+            ('New Hope', 1, 1),
+            ('Zootopia', 0, 2),
+            ('', 5, 0)
+    ))
+    async def test_search_films(self, make_get_request, query_param, len_films, fixture_id, all_films, create_movie_index):
+
+        v = make_get_request
+        # Выполнение запроса
+        response = await v('/film/search', {'query': query_param, 'sort': 'imdb_rating'})
+
+        films_data_fixtures = (all_films, [all_films[-1]], [])
+        # Проверка результата
+        assert response.status == 200
+        assert len(response.body) == len_films
+        assert response.body == films_data_fixtures[fixture_id]
 
     @pytest.mark.asyncio
     @pytest.mark.parametrize(('page_number', 'page_size', 'sort_sign'), ((1, 5, ''), (1, 2, ''), (2, 2, ''), (1, 5, '-')))

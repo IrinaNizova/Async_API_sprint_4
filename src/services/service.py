@@ -92,7 +92,7 @@ class Service:
         else:
             return [self.model.parse_raw(item) for item in json.loads(data)]
 
-    async def _put_item_to_cache(self, item: Model):
+    async def _put_item_to_cache(self, item: model):
         # сохраняем данные о фильме с использованием команды set
         # выставляем время жизни кеша равное 5 минутам
         # https://redis.io/commands/set
