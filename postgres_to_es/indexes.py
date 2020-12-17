@@ -54,3 +54,13 @@ PERSON_MAPPING = {
                 }
             }
         }
+
+GENRE_MAPPING = {
+    'mappings': {
+        'properties': {
+            'id': {'type': 'keyword'},
+            'name': {'type': 'text'},
+            'films': {'type': 'text'}
+        }
+    }
+}

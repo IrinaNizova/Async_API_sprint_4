@@ -8,7 +8,7 @@ from elasticsearch.helpers import bulk
 from ETL import coroutine
 from loader.base_loader import BaseLoader
 from state_storage.base_storage import BaseStorage
-from indexes import PERSON_MAPPING
+from indexes import PERSON_MAPPING, GENRE_MAPPING
 from models import State
 
 
@@ -28,10 +28,8 @@ class ESLoader(BaseLoader):
 
             try:
                 self.is_available_service()
-                if not self.connect.indices.exists(index='genre'):
-                    self.create_genre_index()
-                if not self.connect.indices.exists(index='person'):
-                    self.create_person_index()
+                self.connect.indices.create(index='genre', body=GENRE_MAPPING, ignore=400)
+                self.connect.indices.create(index='genre', body=PERSON_MAPPING, ignore=400)
                 errors = self.load_bulk(pure_data)
             except elasticsearch.exceptions.ConnectionError:
                 logging.error('Elasticsearch is not available')
@@ -49,19 +47,3 @@ class ESLoader(BaseLoader):
                           max_time=lookup_es_max_time)
     def is_available_service(self):
         self.connect.ping()
-
-    def create_genre_index(self):
-        genre_mapping = {
-            'mappings': {
-                'properties': {
-                    'id': {'type': 'keyword'},
-                    'name': {'type': 'text'},
-                    'films': {'type': 'text'}
-                }
-            }
-        }
-        self.connect.indices.create(index='genre', body=genre_mapping)
-
-    def create_person_index(self):
-        person_mapping = PERSON_MAPPING
-        self.connect.indices.create(index='person', body=person_mapping)
