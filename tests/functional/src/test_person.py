@@ -40,7 +40,7 @@ class TestPersonApi:
         return all_persons[0]
 
     @pytest.mark.asyncio
-    @pytest.mark.parametrize(('query', 'len_persons'), (('', 5), ('Lucas', 1)))
+    @pytest.mark.parametrize(('query', 'len_persons'), (('', 5), ('Lucas', 1), ('Fake person', 0)))
     async def test_search_films(self, make_get_request, create_person_index, all_persons, lucas, query, len_persons):
 
         v = make_get_request
@@ -48,7 +48,8 @@ class TestPersonApi:
         response = await v('/person/search', {'query': query})
         assert response.status == 200
         assert len(response.body) == len_persons
-        response_data = [lucas] if query == 'Lucas' else all_persons
+        response_data_dict = {'': all_persons, 'Lucas': [lucas], 'Fake person': []}
+        response_data = response_data_dict[query]
         assert response.body == response_data
 
     @pytest.mark.asyncio

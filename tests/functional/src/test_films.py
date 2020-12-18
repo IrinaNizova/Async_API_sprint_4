@@ -21,7 +21,8 @@ class TestFilmApi:
             ('Star Wars', 5, 0),
             ('New Hope', 1, 1),
             ('Zootopia', 0, 2),
-            ('', 5, 0)
+            ('', 5, 0),
+            ('Fake Movie', 0, 2)
     ))
     async def test_search_films(self, make_get_request, query_param, len_films, fixture_id, all_films, create_movie_index):
 
@@ -33,6 +34,7 @@ class TestFilmApi:
         # Проверка результата
         assert response.status == 200
         assert len(response.body) == len_films
+        print(response.body)
         assert response.body == films_data_fixtures[fixture_id]
 
     @pytest.mark.asyncio
