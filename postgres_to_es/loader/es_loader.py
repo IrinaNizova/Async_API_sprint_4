@@ -29,7 +29,7 @@ class ESLoader(BaseLoader):
             try:
                 self.is_available_service()
                 self.connect.indices.create(index='genre', body=GENRE_MAPPING, ignore=400)
-                self.connect.indices.create(index='genre', body=PERSON_MAPPING, ignore=400)
+                self.connect.indices.create(index='person', body=PERSON_MAPPING, ignore=400)
                 errors = self.load_bulk(pure_data)
             except elasticsearch.exceptions.ConnectionError:
                 logging.error('Elasticsearch is not available')
