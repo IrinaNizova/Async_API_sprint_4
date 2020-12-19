@@ -30,7 +30,7 @@ async def search_person_list(
     else:
         body = None
 
-    persons = await person_service.get_all_with_filter(body=body, params=pagination_params)
+    persons = await person_service.get_all_from_elastic(body=body, params=pagination_params)
     return persons
 
 
@@ -90,5 +90,5 @@ async def get_persons_films(
             person_films.extend(role_films.split(","))
 
     body = json.dumps({"query": {"terms": {"_id": person_films}}})
-    person_films = await film_service.get_all_with_filter(body=body, params=pagination_params)
+    person_films = await film_service.get_all_from_elastic(body=body, params=pagination_params)
     return person_films
