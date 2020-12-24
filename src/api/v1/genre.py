@@ -24,7 +24,7 @@ async def get_genres(
     _filters: FilterParams = request.state.filter_params
     pagination_params = _filters.dict(include={'sort', 'size', 'from_'})
 
-    genres: List[Genre] = await genre_service.get_all_with_filter(params=pagination_params)
+    genres: List[Genre] = await genre_service.get_all_from_elastic(params=pagination_params)
     return genres
 
 

@@ -27,7 +27,7 @@ async def search_film_list(
     else:
         body = None
 
-    films = await film_service.get_all_with_filter(body=body, params=pagination_params)
+    films = await film_service.get_all_from_elastic(body=body, params=pagination_params)
     return films
 
 
@@ -76,6 +76,6 @@ async def film_list(
     pagination_params = _filters.dict(include={'sort', 'size', 'from_'})
 
     body = json.dumps({"query": {"match": {"genre": {"query": genre, "fuzziness": "auto"}}}}) if genre else None
-    films = await film_service.get_all_with_filter(body=body, params=pagination_params)
+    films = await film_service.get_all_from_elastic(body=body, params=pagination_params)
     return films
 
