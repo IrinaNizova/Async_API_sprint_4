@@ -5,7 +5,7 @@ import json
 import pytest
 from elasticsearch import AsyncElasticsearch
 
-from ..settings import ELASTICSEARCH_HOST
+from ..settings import ELASTIC_HOST, ELASTIC_PORT
 from dataclasses import dataclass
 from multidict import CIMultiDictProxy
 from ..settings import SERVICE_URL, REDIS_HOST, REDIS_PORT
@@ -35,7 +35,7 @@ def loop(event_loop):
 
 @pytest.fixture(scope='session')
 async def es_client():
-    client = AsyncElasticsearch(hosts=ELASTICSEARCH_HOST)
+    client = AsyncElasticsearch(hosts=[f'{ELASTIC_HOST}:{ELASTIC_PORT}'])
     yield client
     await client.close()
 

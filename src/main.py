@@ -1,6 +1,8 @@
 import logging
 
 import aioredis
+import backoff
+import elasticsearch
 import uvicorn as uvicorn
 from elasticsearch import AsyncElasticsearch
 from fastapi import FastAPI, Request
@@ -23,6 +25,9 @@ app = FastAPI(
 
 
 @app.on_event('startup')
+@backoff.on_exception(backoff.expo,
+                      (ConnectionRefusedError, elasticsearch.ConnectionError),
+                      max_time=10)
 async def startup():
     redis.redis = await aioredis.create_redis_pool((config.REDIS_HOST, config.REDIS_PORT), minsize=10, maxsize=20)
     elastic.es = AsyncElasticsearch(hosts=[f'{config.ELASTIC_HOST}:{config.ELASTIC_PORT}'])
@@ -51,11 +56,8 @@ async def add_process_time_header(request: Request, call_next):
         from_=0
     )
     filter_params.calculate_offset_from_()
-    # filter_params = dict(query=query, sort=sort, size=size, from_=size * (int(page) - 1) if int(page) > 0 else 0)
     request.state.filter_params = filter_params
     response = await call_next(request)
-    # process_time = time.time() - start_time
-    # response.headers["X-Process-Time"] = str(process_time)
     return response
 
 if __name__ == '__main__':

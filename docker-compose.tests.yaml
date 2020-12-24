@@ -1,0 +1,65 @@
+version: '3'
+services:
+  nginx:
+    image: nginx
+    volumes:
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    ports:
+      - "80:80"
+    depends_on:
+      - api
+
+  api:
+    build: src/.
+    image: movies_api
+    depends_on:
+      - redis
+      - elasticsearch
+    environment:
+      REDIS_HOST: redis
+      ELASTIC_HOST: elasticsearch
+    entrypoint: >
+      sh -c "uvicorn main:app --host 0.0.0.0 --port 8000"
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.9.2
+    container_name: elasticsearch
+    environment:
+      - "discovery.type=single-node"
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+      - 9300:9300
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+
+  redis:
+    image: 'docker.io/bitnami/redis:6.0-debian-10'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+    ports:
+      - 6379:6379
+    volumes:
+      - 'redis_data:/bitnami/redis/data'
+
+  tests:
+    environment:
+      API_HOST: api
+      REDIS_HOST: redis
+      ELASTIC_HOST: elasticsearch
+    image: movies_api
+    working_dir: /app
+    entrypoint: >
+      sh -c "pip install -r /app/tests/functional/requirements.txt
+      && python3 /app/tests/functional/utils/wait_for_es.py
+      && python3 /app/tests/functional/utils/wait_for_redis.py
+      && pytest /app/tests/functional/src"
+
+volumes:
+  es_data:
+  redis_data:
