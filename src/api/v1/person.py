@@ -1,10 +1,12 @@
+import backoff
 import json
 from http import HTTPStatus
 from typing import List, Optional
 
-from fastapi import Depends, HTTPException, APIRouter, Query, Request
+from fastapi import Depends, HTTPException, APIRouter, Request
 from api.v1.film import Film
 
+from core.config import HTTP_RETIES
 from models.film import Person, ResponseMessage, FilterParams
 from services.film import FilmService, get_film_service
 from services.person import PersonService, get_person_service
@@ -13,6 +15,7 @@ from services.person import PersonService, get_person_service
 router = APIRouter()
 
 
+@backoff.on_exception(backoff.expo, HTTPException, max_tries=HTTP_RETIES)
 @router.get('/search',
             summary="Поиск персон",
             description="Полнотекстовый поиск по персонам",
@@ -34,6 +37,7 @@ async def search_person_list(
     return persons
 
 
+@backoff.on_exception(backoff.expo, HTTPException, max_tries=HTTP_RETIES)
 @router.get(
     '/{person_uuid}',
     summary="Информация по персоне",
@@ -57,6 +61,7 @@ async def get_person(
     return person
 
 
+@backoff.on_exception(backoff.expo, HTTPException, max_tries=HTTP_RETIES)
 @router.get(
     '/{person_uuid}/film',
     summary="Информация по фильмам, где участвовала персона",

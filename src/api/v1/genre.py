@@ -1,8 +1,10 @@
+import backoff
 from http import HTTPStatus
-from typing import List, Optional
+from typing import List
 
 from fastapi import Depends, HTTPException, APIRouter, Query, Request
 
+from core.config import HTTP_RETIES
 from models.film import ResponseMessage, Genre, FilterParams
 from services.genre import GenreService, get_genre_service
 
@@ -10,6 +12,7 @@ from services.genre import GenreService, get_genre_service
 router = APIRouter()
 
 
+@backoff.on_exception(backoff.expo, HTTPException, max_tries=HTTP_RETIES)
 @router.get(
     '/',
     summary="Список жанров",
@@ -28,6 +31,7 @@ async def get_genres(
     return genres
 
 
+@backoff.on_exception(backoff.expo, HTTPException, max_tries=HTTP_RETIES)
 @router.get(
     '/{genre_uuid}',
     summary="Информация по жанру",
