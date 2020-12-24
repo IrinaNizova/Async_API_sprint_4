@@ -1,15 +1,18 @@
+import backoff
 import json
 from http import HTTPStatus
 
 from fastapi import APIRouter, Depends, HTTPException, Request
 from typing import List
 
+from core.config import HTTP_RETIES
 from models.film import Film, FilterParams, ResponseMessage
 from services.film import FilmService, get_film_service
 
 router = APIRouter()
 
 
+@backoff.on_exception(backoff.expo, HTTPException, max_tries=HTTP_RETIES)
 @router.get('/search', response_model=List[Film],
             response_model_include={'id', 'title', 'imdb_rating'},
             summary="Поиск кинопроизведений",
@@ -31,7 +34,7 @@ async def search_film_list(
     return films
 
 
-# внедряем FilmService с помощью Depends(get_film_service)
+@backoff.on_exception(backoff.expo, HTTPException, max_tries=HTTP_RETIES)
 @router.get('/{film_id}', response_model=Film,
             summary="Информация по фильму",
             description="Подробная информация по uuid фильма",
@@ -60,6 +63,7 @@ async def film_details(
     return film
 
 
+@backoff.on_exception(backoff.expo, HTTPException, max_tries=HTTP_RETIES)
 @router.get('/', response_model=List[Film],
             response_model_include={'id', 'title', 'imdb_rating'},
             summary="Список фильмов",

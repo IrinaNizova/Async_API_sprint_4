@@ -19,3 +19,5 @@ ELASTIC_PORT = int(os.getenv('ELASTIC_PORT', 9200))
 
 # корень проекта
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+HTTP_RETIES = 3
