@@ -38,17 +38,22 @@ class TestGenreApi:
 
     @pytest.mark.asyncio
     async def test_all_genres(self, make_get_request, create_genre_index, all_genres):
-        v = make_get_request
         # Выполнение запроса
-        response = await v('/genre')
+        response = await make_get_request('/genre')
         assert response.status == 200
         assert response.body == all_genres
 
     @pytest.mark.asyncio
     async def test_one_genre(self, make_get_request, create_genre_index, all_genres):
-        v = make_get_request
         # Выполнение запроса
-        response = await v('/genre/ba3f980c-645e-4fb3-afc1-d57d2b0f3d87')
+        response = await make_get_request('/genre/ba3f980c-645e-4fb3-afc1-d57d2b0f3d87')
         assert response.status == 200
         assert response.body == all_genres[1]
+
+    @pytest.mark.asyncio
+    async def test_no_genre(self, make_get_request, create_genre_index, all_genres):
+        # Выполнение запроса
+        response = await make_get_request('/genre/ba3f980c-645e-4fb3-afc1-d57d2b0f3d88')
+        assert response.status == 404
+
 

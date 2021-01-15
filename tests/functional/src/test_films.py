@@ -26,15 +26,13 @@ class TestFilmApi:
     ))
     async def test_search_films(self, make_get_request, query_param, len_films, fixture_id, all_films, create_movie_index):
 
-        v = make_get_request
         # Выполнение запроса
-        response = await v('/film/search', {'query': query_param, 'sort': 'imdb_rating'})
+        response = await make_get_request('/film/search', {'query': query_param, 'sort': 'imdb_rating'})
 
         films_data_fixtures = (all_films, [all_films[-1]], [])
         # Проверка результата
         assert response.status == 200
         assert len(response.body) == len_films
-        print(response.body)
         assert response.body == films_data_fixtures[fixture_id]
 
     @pytest.mark.asyncio
@@ -42,8 +40,7 @@ class TestFilmApi:
     async def test_all_films(self, make_get_request, all_films,  page_size, page_number, sort_sign):
         if sort_sign == "-":
             all_films = all_films[::-1]
-        v = make_get_request
-        response = await v('/film', {'page[number]': page_number, 'page[size]': page_size, 'sort': sort_sign + 'imdb_rating'})
+        response = await make_get_request('/film', {'page[number]': page_number, 'page[size]': page_size, 'sort': sort_sign + 'imdb_rating'})
 
         assert response.status == 200
         assert len(response.body) == page_size
@@ -51,16 +48,14 @@ class TestFilmApi:
 
     @pytest.mark.asyncio
     async def test_one_film(self, es_client, redis_client, make_get_request, new_hope_film, create_film_index):
-        v = make_get_request
-        response = await v('/film/ab2811a3-3295-4564-988d-1ebc2ee03ab6')
+        response = await make_get_request('/film/ab2811a3-3295-4564-988d-1ebc2ee03ab6')
 
         assert response.status == 200
         assert response.body == new_hope_film
 
     @pytest.mark.asyncio
     async def test_no_exist_film(self, es_client, redis_client, make_get_request):
-        v = make_get_request
-        response = await v('/film/ab2811a3-3295-4564-988d-1ebc2ee03ab7')
+        response = await make_get_request('/film/ab2811a3-3295-4564-988d-1ebc2ee03ab7')
 
         assert response.status == 404
 

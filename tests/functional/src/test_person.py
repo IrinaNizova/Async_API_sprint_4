@@ -43,9 +43,8 @@ class TestPersonApi:
     @pytest.mark.parametrize(('query', 'len_persons'), (('', 5), ('Lucas', 1), ('Fake person', 0)))
     async def test_search_films(self, make_get_request, create_person_index, all_persons, lucas, query, len_persons):
 
-        v = make_get_request
         # Выполнение запроса
-        response = await v('/person/search', {'query': query})
+        response = await make_get_request('/person/search', {'query': query})
         assert response.status == 200
         assert len(response.body) == len_persons
         response_data_dict = {'': all_persons, 'Lucas': [lucas], 'Fake person': []}
@@ -54,25 +53,22 @@ class TestPersonApi:
 
     @pytest.mark.asyncio
     async def test_one_person(self, make_get_request, lucas, create_person_index):
-        v = make_get_request
         # Выполнение запроса
-        response = await v('/person/3b31b4d1-6ab9-4552-b1ab-de3b61e25e24')
+        response = await make_get_request('/person/3b31b4d1-6ab9-4552-b1ab-de3b61e25e24')
         assert response.status == 200
         assert response.body == lucas
 
     @pytest.mark.asyncio
     async def test_no_person(self, make_get_request, create_person_index):
-        v = make_get_request
         # Выполнение запроса
-        response = await v('/person/3b31b4d1-6ab9-4552-b1ab-de3b61e25e23')
+        response = await make_get_request('/person/3b31b4d1-6ab9-4552-b1ab-de3b61e25e23')
         assert response.status == 404
         assert response.body == {'detail': "Person wasn't found"}
 
     @pytest.mark.asyncio
     async def test_person_films(self, make_get_request, create_person_index):
-        v = make_get_request
         # Выполнение запроса
-        response = await v('/person/3b31b4d1-6ab9-4552-b1ab-de3b61e25e24/film')
+        response = await make_get_request('/person/3b31b4d1-6ab9-4552-b1ab-de3b61e25e24/film')
         assert response.status == 200
         assert response.body == [{'id': 'ab2811a3-3295-4564-988d-1ebc2ee03ab6',
                                   'imdb_rating': 8.6,
